@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+ <h1> Prácticas de Etiquetas de Formularios</h1>  
+	<hr>
+     <figure>
+  <img src="Logo.jpg" alt="Logotipo de Forms">
+  <figcaption>Logotipo de Forms.</figcaption>
+</figure>
+
+	<!--<form action="javascript:recibeform()" method="post" autocomplete="off" >  -->
+	<form action="./procesaform.php" method="post" autocomplete="off" >
+		<label for="nombre">Escribe tu nombre:</label>
+		<input type="text" name="nombre" value="" placeholder="escribe tu nombre"/>
+		<br/>
+		<br/><br/>
+		<label for="username">Username:</label><br>
+  <input type="text" id="username" name="username"><br>
+  <label for="pwd">Password:</label><br>
+  <input type="password" id="pwd" name="pwd">
+
+  <br/><br />
+		<input type="submit" value="Enviar" />
+		  <input type="reset" value="Reset">
+	</form>
+
+	<script type="text/javascript">
+		function recibeform(){
+			alert("Formulario recibido");
+		}
+	</script>
+</body>
+</html>
+
+<form method="post" action="/send/">
+  <input type="checkbox" checked> Mostrar nombre real de usuario
+</form>
+
+<form method="post" action="/send/">
+  <input type="radio" name="category" value="user" checked> Verdadero
+  <input type="radio" name="category" value="business"> Falso
+</form>
+
+<form method="post" action="/send/">
+  Selecciona la fecha deseada:
+  <input type="date" value="2025-09-22"
+         min="2025-02-25" max="2025-12-25" step="2">
+</form>
+
+<form method="post" action="/send/">
+  Selecciona la opción deseada:
+  <select multiple>
+    <option value="1">Opción 1</option>
+    <option value="2">Opción 2</option>
+    <option value="3">Opción 3</option>
+    <option value="4">Opción 4</option>
+    <option value="5">Opción 5</option>
+  </select>
+</form>
+
+<form method="post" action="/send/">
+  Selecciona el color deseado:
+  <input type="color" value="#1BF44A">
+</form>
+<form method="post" action="/send/">
+  Un valor numérico:
+  <input type="number" value="25" min="10" max="50">
+
+  Un valor numérico en rango:
+  <input type="range" value="25" min="10" max="50"
+         onInput="this.nextElementSibling.value = this.value">
+  <output>25</output>
+</form>
+  <p>Característica de Forms.</p>
+  <footer>
+
+ <ol>
+  <li>Interfaz intuituva</li>
+  <li>Análisis en tiempo real</li>
+  <li>Colaboración y Compartición</li>
+</ol>
+<form method="post" action="/send/" enctype="multipart/form-data">
+  Selecciona varias fotos para enviar:
+  <input type="file" accept="image/jpeg" multiple>
+</form>
