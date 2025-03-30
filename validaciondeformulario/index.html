@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodo de pago</title>
+    <link rel="stylesheet" href="principal.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulario de Pago</h2>
+        <form action="#" method="POST">
+            <label>Método de Pago:</label>
+            <select required>
+                <option value="credito">Tarjeta de Crédito</option>
+                <option value="debito">Tarjeta de Débito</option>
+                <option value="paypal">PayPal</option>
+            </select>
+
+            <label>Nombre del Titular:</label>
+            <input type="text" placeholder=>
+<label>Número de Tarjeta:</label>
+<input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
+<span id="mensaje-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
+
+<script>
+    document.getElementById("numero-tarjeta").addEventListener("input", function () {
+        let tarjeta = this.value.replace(/\D/g, ""); // Solo permite números
+        let mensajeError = document.getElementById("mensaje-error");
+
+        if (tarjeta.length === 16 || tarjeta.length === 18) {
+            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
+        } else {
+            mensajeError.style.display = "inline"; // Muestra el mensaje si no cumple
+        }
+
+        this.value = tarjeta.substring(0, 18); // Limita a 18 caracteres
+    });
+</script>
+
+
+            <input type="date" name="date" placeholder="2024-07-22"
+          min="2024-01-01" max="2035-12-01" step="2">
+
+           <!-- CVV -->
+<label>CVV:</label>
+<input type="password" id="cvv" placeholder="CVV" required maxlength="3">
+<span id="cvv-error" style="color: red; font-weight: bold; display: none;">Debe tener 3 dígitos</span>
+
+<script>
+    document.getElementById("cvv").addEventListener("input", function () {
+        let cvv = this.value.replace(/\D/g, ""); // Solo permite números
+        let mensajeError = document.getElementById("cvv-error");
+
+        if (cvv.length === 3) {
+            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
+        } else {
+            mensajeError.style.display = "block"; // Muestra el mensaje si no cumple
+        }
+
+        this.value = cvv.substring(0, 3); // Limita a 3 caracteres
+    });
+</script>
+
+
+            <button type="submit">Pagar</button>
+        </form>
+    </div>
+
+</body>
+</html>

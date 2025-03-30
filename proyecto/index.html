@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Buena y Deliciosa</title>
+  <link rel="stylesheet" href="principal.css">
+  <style>
+    header h1 {
+      margin-top: -100px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <!-- Enlace para redirigir a la sección con id "inicio" -->
+<a class="sc-eHgmQL kzWSGr" href="#inicio" style="color: white; font-size: 2.5rem; font-family: 'Pacifico', cursive; text-decoration: none;">La Buena y Deliciosa</a>
+
+    <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a href="#" onclick="mostrarSeccion('productos')">Productos</a>
+    <a href="#" onclick="mostrarSeccion('carrito')" class="carrito-link">
+      🛒 <span id="contador-carrito">0</span>
+    </a>
+    <a href="#" onclick="mostrarSeccion('pago')">Formas de Pago</a>
+  </nav>
+
+  <section id="inicio" class="seccion">
+    <header>
+      <h1>La Buena y Deliciosa</h1>
+      <p>¡Postres irresistibles, hechos con amor!</p>
+      <img src="inicio.jpg" alt="Variedad de postres" class="banner-img">
+    </header>
+    <a href="#" class="btn" onclick="mostrarSeccion('productos')">Ver Productos</a>
+  </section>
+
+  <section id="productos" class="seccion" style="display: none;">
+    <h2>Nuestros Productos</h2>
+    <label for="categoria">Selecciona una categoría:</label>
+    <select id="categoria" name="categoria" onchange="mostrarCategoria()">
+      <option value="postres">Postres</option>
+      <option value="dulces">Dulces</option>
+      <option value="frutas">Frutas</option>
+    </select>
+
+    <div id="postres" class="categoria">
+      <h3>Postres</h3>
+      <div class="producto" data-nombre="Tarta de Manzana" data-precio="150">
+        <img src="tarta.jpg" alt="Tarta de manzana">
+        <h3>Tarta de Manzana</h3>
+        <p>$150</p>
+        <label for="cantidad-tarta">Cantidad:</label>
+        <input type="number" id="cantidad-tarta" value="1" min="1" max="100">
+        <button onclick="agregarAlCarrito(this, 'cantidad-tarta')">Agregar al Carrito</button>
+      </div>
+      <div class="producto" data-nombre="Pastel de Chocolate" data-precio="200">
+        <img src="pastel.jpg" alt="Pastel de chocolate">
+        <h3>Pastel de Chocolate</h3>
+        <p>$200</p>
+        <label for="cantidad-pastel">Cantidad:</label>
+        <input type="number" id="cantidad-pastel" value="1" min="1" max="100">
+        <button onclick="agregarAlCarrito(this, 'cantidad-pastel')">Agregar al Carrito</button>
+      </div>
+    </div>
+
+    <div id="dulces" class="categoria" style="display: none;">
+      <h3>Dulces</h3>
+      <div class="producto" data-nombre="Dulce de Leche" data-precio="50">
+        <img src="dulce.jpg" alt="Dulce de Leche">
+        <h3>Dulce de Leche</h3>
+        <p>$50</p>
+        <label for="cantidad-dulce">Cantidad:</label>
+        <input type="number" id="cantidad-dulce" value="1" min="1" max="100">
+        <button onclick="agregarAlCarrito(this, 'cantidad-dulce')">Agregar al Carrito</button>
+      </div>
+    </div>
+
+    <div id="frutas" class="categoria" style="display: none;">
+      <h3>Frutas</h3>
+      <div class="producto" data-nombre="Fresas con Crema" data-precio="100">
+        <img src="fresas.jpg" alt="Fresas con Crema">
+        <h3>Fresas con Crema</h3>
+        <p>$100</p>
+        <label for="cantidad-fresas">Cantidad:</label>
+        <input type="number" id="cantidad-fresas" value="1" min="1" max="100">
+        <button onclick="agregarAlCarrito(this, 'cantidad-fresas')">Agregar al Carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="carrito" class="seccion" style="display: none;">
+    <h2>Tu Carrito</h2>
+    <div id="lista-carrito" class="carrito-estilo"></div>
+    <p>Total: $<span id="total">0</span></p>
+    <!-- Aquí va el botón para ir a la sección de pago -->
+    <button onclick="mostrarSeccion('pago')">Ir a Pagar</button>
+  </section>
+
+  <section id="pago" class="seccion" style="display: none;">
+    <h2>Formas de Pago</h2>
+    <p>Aceptamos pagos con tarjeta de crédito, débito y transferencias bancarias.</p>
+       </script>
+  <div class="container">
+        <h2>Metodo de pago</h2>
+        <form action="#" method="POST">
+          <label>Método de Pago:</label>
+            <select required>
+                <option value="credito">Tarjeta de Crédito</option>
+                <option value="debito">Tarjeta de Débito</option>
+                <option value="paypal">PayPal</option>
+            </select>
+
+            <label>Nombre del Titular:</label>
+            <input type="text" placeholder=>
+
+           <label>Número de Tarjeta:</label>
+           <input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
+           <span id="mensaje-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
+
+           <script>
+            document.getElementById("numero-tarjeta").addEventListener("input", function () {
+           let tarjeta = this.value.replace(/\D/g, ""); // Solo permite números
+           let mensajeError = document.getElementById("mensaje-error");
+
+            if (tarjeta.length === 16 || tarjeta.length === 18) {
+            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
+           } else {
+            mensajeError.style.display = "inline"; // Muestra el mensaje si no cumple
+           }
+
+          this.value = tarjeta.substring(0, 18); // Limita a 18 caracteres
+           });
+           </script>
+
+            <input type="date" name="date" placeholder="2024-07-22"
+            min="2024-01-01" max="2035-12-01" step="2">
+
+           <!-- CVV -->
+<label>CVV:</label>
+<input type="password" id="cvv" placeholder="CVV" required maxlength="3">
+<span id="cvv-error" style="color: red; font-weight: bold; display: none;">Debe tener 3 dígitos</span>
+
+<script>
+    document.getElementById("cvv").addEventListener("input", function () {
+        let cvv = this.value.replace(/\D/g, ""); // Solo permite números
+        let mensajeError = document.getElementById("cvv-error");
+
+        if (cvv.length === 3) {
+            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
+        } else {
+            mensajeError.style.display = "block"; // Muestra el mensaje si no cumple
+        }
+
+        this.value = cvv.substring(0, 3); // Limita a 3 caracteres
+    });
+</script>
+
+              <button type="submit">Pagar</button>
+</form>
+    </div>
+</section>
+  <script>
+    function mostrarSeccion(seccionId) {
+      const secciones = document.querySelectorAll('.seccion');
+      secciones.forEach(seccion => seccion.style.display = 'none');
+      document.getElementById(seccionId).style.display = 'block';
+    }
+  function mostrarCategoria() {
+      const categoriaSeleccionada = document.getElementById('categoria').value;
+      const categorias = document.querySelectorAll('.categoria');
+      categorias.forEach(categoria => categoria.style.display = 'none');
+      document.getElementById(categoriaSeleccionada).style.display = 'block';
+    }
+
+    let carrito = [];
+
+function agregarAlCarrito(boton, cantidadId) {
+  const producto = boton.parentElement;
+  const nombre = producto.getAttribute('data-nombre');
+  const precio = parseFloat(producto.getAttribute('data-precio'));
+  const cantidad = parseInt(document.getElementById(cantidadId).value);
+
+  const itemExistente = carrito.find(item => item.nombre === nombre);
+  if (itemExistente) {
+    itemExistente.cantidad += cantidad;
+  } else {
+    carrito.push({ nombre, precio, cantidad });
+  }
+
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const listaCarrito = document.getElementById('lista-carrito');
+  const totalSpan = document.getElementById('total');
+  const contadorCarrito = document.getElementById('contador-carrito');
+
+  listaCarrito.innerHTML = '';
+  let total = 0;
+  let cantidadTotal = 0;
+
+  carrito.forEach(item => {
+    total += item.precio * item.cantidad;
+    cantidadTotal += item.cantidad;
+
+    const li = document.createElement('li');
+    li.textContent = `${item.nombre} x ${item.cantidad} - $${item.precio * item.cantidad}`;
+    listaCarrito.appendChild(li);
+  });
+
+  totalSpan.textContent = total;
+  contadorCarrito.textContent = cantidadTotal;
+}
+
+
+  </script>
+
+</body>
+
+</html>
