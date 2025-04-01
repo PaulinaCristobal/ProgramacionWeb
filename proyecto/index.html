@@ -98,66 +98,107 @@
   <section id="pago" class="seccion" style="display: none;">
     <h2>Formas de Pago</h2>
     <p>Aceptamos pagos con tarjeta de crédito, débito y transferencias bancarias.</p>
-       </script>
-  <div class="container">
-        <h2>Metodo de pago</h2>
-        <form action="#" method="POST">
-          <label>Método de Pago:</label>
-            <select required>
+
+    <div class="container">
+        <h2>Método de pago</h2>
+
+        <form id="form-pago" action="#" method="POST">
+            <label>Método de Pago:</label>
+            <select id="metodo-pago" required>
+                <option value="">Seleccione un método</option>
                 <option value="credito">Tarjeta de Crédito</option>
                 <option value="debito">Tarjeta de Débito</option>
                 <option value="paypal">PayPal</option>
             </select>
 
             <label>Nombre del Titular:</label>
-            <input type="text" placeholder=>
+            <input type="text" id="nombre-titular" placeholder="Ingrese su nombre" required>
+            <span id="nombre-error" style="color: red; font-size: 12px; display: none;">
+                Solo se permiten letras y espacios.
+            </span>
 
-           <label>Número de Tarjeta:</label>
-           <input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
-           <span id="mensaje-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
+            <label>Número de Tarjeta:</label>
+            <input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
+            <span id="tarjeta-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
 
-           <script>
-            document.getElementById("numero-tarjeta").addEventListener("input", function () {
-           let tarjeta = this.value.replace(/\D/g, ""); // Solo permite números
-           let mensajeError = document.getElementById("mensaje-error");
+            <label>Fecha de Expiración:</label>
+            <input type="date" id="fecha-exp" min="2024-01-01" max="2035-12-01" required>
 
-            if (tarjeta.length === 16 || tarjeta.length === 18) {
-            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
-           } else {
-            mensajeError.style.display = "inline"; // Muestra el mensaje si no cumple
-           }
+            <label>CVV:</label>
+            <input type="password" id="cvv" placeholder="CVV" required maxlength="3">
+            <span id="cvv-error" style="color: red; font-weight: bold; display: none;">Debe tener 3 dígitos</span>
 
-          this.value = tarjeta.substring(0, 18); // Limita a 18 caracteres
-           });
-           </script>
+            <button type="submit" id="btn-pagar">Pagar</button>
+        </form>
 
-            <input type="date" name="date" placeholder="2024-07-22"
-            min="2024-01-01" max="2035-12-01" step="2">
-
-           <!-- CVV -->
-<label>CVV:</label>
-<input type="password" id="cvv" placeholder="CVV" required maxlength="3">
-<span id="cvv-error" style="color: red; font-weight: bold; display: none;">Debe tener 3 dígitos</span>
+        <!-- Mensaje de éxito -->
+        <div id="mensaje-exito" style="display: none; color: green; font-weight: bold; margin-top: 10px;">
+            ✅ Pago realizado con éxito.
+        </div>
+    </div>
+</section>
 
 <script>
+    // Validación Nombre
+    document.getElementById("nombre-titular").addEventListener("input", function () {
+        let nombre = this.value;
+        let mensajeError = document.getElementById("nombre-error");
+
+        if (/^[A-Za-z\s]+$/.test(nombre) || nombre === "") {
+            mensajeError.style.display = "none"; 
+        } else {
+            mensajeError.style.display = "inline"; 
+        }
+
+        this.value = nombre.replace(/[^A-Za-z\s]/g, ""); 
+    });
+
+    // Validación Tarjeta
+    document.getElementById("numero-tarjeta").addEventListener("input", function () {
+        let tarjeta = this.value.replace(/\D/g, ""); // Solo números
+        let mensajeError = document.getElementById("tarjeta-error");
+
+        if (tarjeta.length === 16 || tarjeta.length === 18) {
+            mensajeError.style.display = "none"; 
+        } else {
+            mensajeError.style.display = "inline"; 
+        }
+
+        this.value = tarjeta.substring(0, 18);
+    });
+
+    // Validación CVV
     document.getElementById("cvv").addEventListener("input", function () {
-        let cvv = this.value.replace(/\D/g, ""); // Solo permite números
+        let cvv = this.value.replace(/\D/g, ""); // Solo números
         let mensajeError = document.getElementById("cvv-error");
 
         if (cvv.length === 3) {
-            mensajeError.style.display = "none"; // Oculta el mensaje si es válido
+            mensajeError.style.display = "none"; 
         } else {
-            mensajeError.style.display = "block"; // Muestra el mensaje si no cumple
+            mensajeError.style.display = "block"; 
         }
 
-        this.value = cvv.substring(0, 3); // Limita a 3 caracteres
+        this.value = cvv.substring(0, 3);
+    });
+
+    // Validación del formulario
+    document.getElementById("form-pago").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita el envío real del formulario
+
+        let metodo = document.getElementById("metodo-pago").value;
+        let nombre = document.getElementById("nombre-titular").value;
+        let tarjeta = document.getElementById("numero-tarjeta").value;
+        let cvv = document.getElementById("cvv").value;
+        let fecha = document.getElementById("fecha-exp").value;
+
+        if (metodo && nombre && (tarjeta.length === 16 || tarjeta.length === 18) && cvv.length === 3 && fecha) {
+            document.getElementById("mensaje-exito").style.display = "block"; 
+        } else {
+            alert("Por favor, complete todos los campos correctamente.");
+        }
     });
 </script>
 
-              <button type="submit">Pagar</button>
-</form>
-    </div>
-</section>
   <script>
     function mostrarSeccion(seccionId) {
       const secciones = document.querySelectorAll('.seccion');
