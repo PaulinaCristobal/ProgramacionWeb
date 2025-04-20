@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metodo de pago</title>
-    <link rel="stylesheet" href="principal.css">
-    <style>
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pago - La Buena y Deliciosa</title>
+  <link rel="stylesheet" href="principal.css" />
 </head>
 <body>
+   <nav>
+    <a class="sc-eHgmQL kzWSGr" href="index.html" style="color: white; font-size: 2.5rem; font-family: 'Pacifico', cursive; text-decoration: none;">La Buena y Deliciosa</a>
+    <a href="index.html" onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a href="productos.html" onclick="mostrarSeccion('productos')">Productos</a>
+    <a href="carrito.html" class="carrito-link"> 🛒 <span id="contador-carrito">0</span> </a>
+    <a href="pago.html" onclick="mostrarSeccion('pago')">Formas de Pago</a>
+  </nav>
 
+  <section id="pago" class="seccion">
+    <h2>Formas de Pago</h2>
+    <p>Aceptamos pagos con tarjeta de crédito y débito.
+    </p>
     <div class="container">
-        <h2>Método de pago</h2>
+      <h2>Metodo de pago</h2>
+      <form action="#" method="POST">
+        <label>Método de Pago:</label>
+        <select required>
+          <option value="credito">Tarjeta de Crédito</option>
+          <option value="debito">Tarjeta de Débito</option>
+          <option value="paypal">PayPal</option>
+        </select>
 
-        <form id="form-pago" action="#" method="POST">
-            <label>Método de Pago:</label>
-            <select id="metodo-pago" required>
-                <option value="">Seleccione un método</option>
-                <option value="credito">Tarjeta de Crédito</option>
-                <option value="debito">Tarjeta de Débito</option>
-                <option value="paypal">PayPal</option>
-            </select>
+             <label>Número de Tarjeta:</label>
+            <input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
+            <span id="tarjeta-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
+
 
             <label>Nombre del Titular:</label>
             <input type="text" id="nombre-titular" placeholder="Ingrese su nombre" required>
             <span id="nombre-error" style="color: red; font-size: 12px; display: none;">
     
             </span>
-
-            <label>Número de Tarjeta:</label>
-            <input type="text" id="numero-tarjeta" placeholder="Ingrese su número de tarjeta" required maxlength="18">
-            <span id="tarjeta-error" style="color: red; display: none;">Debe tener 16 o 18 dígitos</span>
 
             <label>Fecha de Expiración:</label>
             <input type="date" id="fecha-exp" min="2024-01-01" max="2035-12-01" required>
@@ -51,20 +58,6 @@
 </section>
 
 <script>
-    // Validación Nombre
-    document.getElementById("nombre-titular").addEventListener("input", function () {
-        let nombre = this.value;
-        let mensajeError = document.getElementById("nombre-error");
-
-        if (/^[A-Za-z\s]+$/.test(nombre) || nombre === "") {
-            mensajeError.style.display = "none"; 
-        } else {
-            mensajeError.style.display = "inline"; 
-        }
-
-        this.value = nombre.replace(/[^A-Za-z\s]/g, ""); 
-    });
-
     // Validación Tarjeta
     document.getElementById("numero-tarjeta").addEventListener("input", function () {
         let tarjeta = this.value.replace(/\D/g, ""); // Solo números
@@ -77,6 +70,21 @@
         }
 
         this.value = tarjeta.substring(0, 18);
+    });
+
+
+    // Validación Nombre
+    document.getElementById("nombre-titular").addEventListener("input", function () {
+        let nombre = this.value;
+        let mensajeError = document.getElementById("nombre-error");
+
+        if (/^[A-Za-z\s]+$/.test(nombre) || nombre === "") {
+            mensajeError.style.display = "none"; 
+        } else {
+            mensajeError.style.display = "inline"; 
+        }
+
+        this.value = nombre.replace(/[^A-Za-z\s]/g, ""); 
     });
 
     // Validación CVV
@@ -109,11 +117,10 @@
             alert("Por favor, complete todos los campos correctamente.");
         }
     });
-</script>
+  </script>
 
 
         </form>
     </div>
-
 </body>
 </html>

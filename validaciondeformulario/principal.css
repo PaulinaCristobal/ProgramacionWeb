@@ -2,24 +2,23 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
-    display: flex;
+    display: flex;  
     justify-content: center;
     align-items: center;
 }
 
-/* Contenedor de pago ocupa toda la pantalla */
+/* Contenedor principal */
 .container {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1300px; /* Ajusta el tamaño máximo para que no sea demasiado grande */
-    height: 100%;
-    max-height: 600px; /* Controla que no sea muy alto */
+    max-width: 1300px;
+    max-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,4 +53,24 @@ button {
 
 button:hover {
     background-color: #ff3385;
+}
+
+/* ----------- MEDIA QUERY PARA TELÉFONOS ----------- */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Hace que el contenedor no sea demasiado grande */
+        max-width: 400px; /* Limita el ancho para teléfonos */
+        height: auto; /* Permite que el contenido crezca según necesidad */
+        padding: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Menos sombra en pantallas pequeñas */
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
 }
