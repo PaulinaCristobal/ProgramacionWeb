@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dado vs CPU 🎮</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Dado vs CPU 🎮</h1>
+    
+    <div class="players">
+      <div class="player">
+        <h2>Jugador 🎲</h2>
+        <div class="dice" id="jugadorDado">🎲</div>
+      </div>
+      <div class="player">
+        <h2>CPU 🤖</h2>
+        <div class="dice" id="cpuDado">🎲</div>
+      </div>
+    </div>
+
+    <button onclick="jugar()">🎯 Lanzar Dados</button>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <audio id="diceSound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-dice-roll-1994.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

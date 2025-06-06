@@ -38,6 +38,9 @@ var segundo = document.getElementById("segundo");
 // Obtener los párrafos (existen varios métodos...)
 var parrafo1 = primero.getElementsByTagName("p")[0];
 var parrafo2 = segundo.firstChild;
+//var parrafo2=document.body.childNodes[2].firstChild;
+//var parrafo2= document.qrySelectorAll("p")[1];
+//var parrafo2 = parrafo1.nextSibling;
 // Obtener los números a través del nodo Text de cada
 // nodo de tipo Element de los parrafos
 var numero1 = parseInt(parrafo1.firstChild.nodeValue);
